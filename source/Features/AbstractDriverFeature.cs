@@ -46,6 +46,13 @@ namespace LenovoController.Features
             return bytesReturned;
         }
 
+        protected static uint ReverseEndianness(uint state)
+        {
+            var bytes = BitConverter.GetBytes(state);
+            Array.Reverse(bytes, 0, bytes.Length);
+            return BitConverter.ToUInt32(bytes, 0);
+        }
+
         protected static bool GetNthBit(uint num, int n)
         {
             return (num & (1 << n)) != 0;

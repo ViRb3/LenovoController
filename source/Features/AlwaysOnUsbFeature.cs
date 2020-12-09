@@ -38,10 +38,7 @@ namespace LenovoController.Features
 
         protected override AlwaysOnUsbState FromInternal(uint state)
         {
-            var bytes = BitConverter.GetBytes(state);
-            Array.Reverse(bytes, 0, bytes.Length);
-            state = BitConverter.ToUInt32(bytes, 0);
-
+            state = ReverseEndianness(state);
             if (GetNthBit(state, 31)) // is on?
             {
                 if (GetNthBit(state, 23))

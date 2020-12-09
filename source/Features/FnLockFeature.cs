@@ -35,10 +35,7 @@ namespace LenovoController.Features
 
         protected override FnLockState FromInternal(uint state)
         {
-            var bytes = BitConverter.GetBytes(state);
-            Array.Reverse(bytes, 0, bytes.Length);
-            state = BitConverter.ToUInt32(bytes, 0);
-
+            state = ReverseEndianness(state);
             if (GetNthBit(state, 18))
                 return FnLockState.On;
             return FnLockState.Off;
