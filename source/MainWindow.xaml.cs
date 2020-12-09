@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using LenovoController.Features;
@@ -24,6 +25,8 @@ namespace LenovoController
         public MainWindow()
         {
             InitializeComponent();
+
+            mainWindow.Title += $" v{AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Version}";
             _fanProfileButtons = new[] {radioQuiet, radioBalance, radioPerformance};
             _batteryButtons = new[] {radioConservation, radioNormalCharge, radioRapidCharge};
             _alwaysOnUsbButtons = new[] {radioAlwaysOnUsbOff, radioAlwaysOnUsbOnWhenSleeping, radioAlwaysOnUsbOnAlways};
