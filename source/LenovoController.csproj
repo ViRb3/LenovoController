@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Features\AbstractDriverFeature.cs" />
     <Compile Include="Features\AbstractWmiFeature.cs" />
     <Compile Include="Features\AlwaysOnUsbFeature.cs" />
     <Compile Include="Features\BatteryFeature.cs" />
@@ -69,8 +70,6 @@
     <Compile Include="Features\OverDriveFeature.cs" />
     <Compile Include="Features\TouchpadLockFeature.cs" />
     <Compile Include="Providers\DriverProvider.cs" />
-    <Compile Include="Providers\WMIProvider.cs" />
-    <Compile Include="Util.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

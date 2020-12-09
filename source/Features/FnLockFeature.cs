@@ -6,28 +6,21 @@ namespace LenovoController.Features
     public enum FnLockState
     {
         Off,
-        On,
-        Status
+        On
     }
 
-    public class FnLockFeature : IFeature<FnLockState>
+    public class FnLockFeature : AbstractDriverFeature<FnLockState>
     {
-        public FnLockState GetState()
+        public FnLockFeature() : base(DriverProvider.EnergyDriver, 0x831020E8)
         {
-            DriverProvider.SendCode(DriverProvider.EnergyDriver, 0X831020E8,
-                ToInternal(FnLockState.Status)[0], out var result);
-            return FromInternal(result);
         }
 
-        public void SetState(FnLockState state)
+        protected override byte GetInternalStatus()
         {
-            var codes = ToInternal(state);
-            foreach (var code in codes)
-                DriverProvider.SendCode(DriverProvider.EnergyDriver, 0X831020E8,
-                    code, out _);
+            return 0x2;
         }
 
-        private byte[] ToInternal(FnLockState state)
+        protected override byte[] ToInternal(FnLockState state)
         {
             switch (state)
             {
@@ -35,20 +28,18 @@ namespace LenovoController.Features
                     return new byte[] {0xF};
                 case FnLockState.On:
                     return new byte[] {0xA, 0xE};
-                case FnLockState.Status:
-                    return new byte[] {0x2};
                 default:
                     throw new Exception("Invalid state");
             }
         }
 
-        private static FnLockState FromInternal(uint state)
+        protected override FnLockState FromInternal(uint state)
         {
             var bytes = BitConverter.GetBytes(state);
             Array.Reverse(bytes, 0, bytes.Length);
             state = BitConverter.ToUInt32(bytes, 0);
 
-            if (Util.GetNthBit(state, 18))
+            if (GetNthBit(state, 18))
                 return FnLockState.On;
             return FnLockState.Off;
         }

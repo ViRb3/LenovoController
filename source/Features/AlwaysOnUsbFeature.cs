@@ -7,28 +7,21 @@ namespace LenovoController.Features
     {
         Off,
         OnWhenSleeping,
-        OnAlways,
-        Status
+        OnAlways
     }
 
-    public class AlwaysOnUsbFeature : IFeature<AlwaysOnUsbState>
+    public class AlwaysOnUsbFeature : AbstractDriverFeature<AlwaysOnUsbState>
     {
-        public AlwaysOnUsbState GetState()
+        public AlwaysOnUsbFeature() : base(DriverProvider.EnergyDriver, 0x831020E8)
         {
-            DriverProvider.SendCode(DriverProvider.EnergyDriver, 0X831020E8,
-                ToInternal(AlwaysOnUsbState.Status)[0], out var result);
-            return FromInternal(result);
         }
 
-        public void SetState(AlwaysOnUsbState state)
+        protected override byte GetInternalStatus()
         {
-            var codes = ToInternal(state);
-            foreach (var code in codes)
-                DriverProvider.SendCode(DriverProvider.EnergyDriver, 0X831020E8,
-                    code, out _);
+            return 0x2;
         }
 
-        private byte[] ToInternal(AlwaysOnUsbState state)
+        protected override byte[] ToInternal(AlwaysOnUsbState state)
         {
             switch (state)
             {
@@ -38,22 +31,20 @@ namespace LenovoController.Features
                     return new byte[] {0xA, 0x12};
                 case AlwaysOnUsbState.OnAlways:
                     return new byte[] {0xA, 0x13};
-                case AlwaysOnUsbState.Status:
-                    return new byte[] {0x2};
                 default:
                     throw new Exception("Invalid state");
             }
         }
 
-        private static AlwaysOnUsbState FromInternal(uint state)
+        protected override AlwaysOnUsbState FromInternal(uint state)
         {
             var bytes = BitConverter.GetBytes(state);
             Array.Reverse(bytes, 0, bytes.Length);
             state = BitConverter.ToUInt32(bytes, 0);
 
-            if (Util.GetNthBit(state, 31)) // is on?
+            if (GetNthBit(state, 31)) // is on?
             {
-                if (Util.GetNthBit(state, 23))
+                if (GetNthBit(state, 23))
                     return AlwaysOnUsbState.OnAlways;
                 return AlwaysOnUsbState.OnWhenSleeping;
             }

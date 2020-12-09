@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
 namespace LenovoController.Providers
@@ -23,15 +22,6 @@ namespace LenovoController.Providers
 
                 return _energyDriver;
             }
-        }
-
-        public static int SendCode(SafeFileHandle handle, uint controlCode, byte inBuffer, out uint outBuffer)
-        {
-            if (!Native.DeviceIoControl(handle, controlCode, ref inBuffer, sizeof(byte),
-                out outBuffer, sizeof(uint), out var bytesReturned, IntPtr.Zero)
-            )
-                throw new Exception("DeviceIoControl returned 0, last error: " + Marshal.GetLastWin32Error());
-            return bytesReturned;
         }
     }
 }
