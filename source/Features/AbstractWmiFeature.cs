@@ -38,7 +38,7 @@ namespace LenovoController.Features
         {
             return (T) (object) (state - _offset);
         }
-        
+
         private static int ExecuteGamezone(string methodName, string resultPropertyName,
             Dictionary<string, string> methodParams = null)
         {
@@ -58,10 +58,8 @@ namespace LenovoController.Features
                 var mo = (ManagementObject) enumerator.Current;
                 var methodParamsObject = mo.GetMethodParameters(methodName);
                 if (methodParams != null)
-                {
                     foreach (var pair in methodParams)
                         methodParamsObject[pair.Key] = pair.Value;
-                }
 
                 return Convert.ToInt32(
                     mo.InvokeMethod(methodName, methodParamsObject, null)?.Properties[resultPropertyName].Value);

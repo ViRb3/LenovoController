@@ -7,20 +7,19 @@ using LenovoController.Features;
 namespace LenovoController
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly FanProfileFeature _fanProfileFeature = new FanProfileFeature();
-        private readonly BatteryFeature _batteryFeature = new BatteryFeature();
+        private readonly RadioButton[] _alwaysOnUsbButtons;
         private readonly AlwaysOnUsbFeature _alwaysOnUsbFeature = new AlwaysOnUsbFeature();
+        private readonly RadioButton[] _batteryButtons;
+        private readonly BatteryFeature _batteryFeature = new BatteryFeature();
+        private readonly RadioButton[] _fanProfileButtons;
+        private readonly FanProfileFeature _fanProfileFeature = new FanProfileFeature();
+        private readonly FnLockFeature _fnLockFeature = new FnLockFeature();
         private readonly OverDriveFeature _overDriveFeature = new OverDriveFeature();
         private readonly TouchpadLockFeature _touchpadLockFeature = new TouchpadLockFeature();
-        private readonly FnLockFeature _fnLockFeature = new FnLockFeature();
-
-        private readonly RadioButton[] _fanProfileButtons;
-        private readonly RadioButton[] _alwaysOnUsbButtons;
-        private readonly RadioButton[] _batteryButtons;
 
         public MainWindow()
         {

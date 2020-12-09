@@ -6,8 +6,8 @@ namespace LenovoController.Features
 {
     public abstract class AbstractDriverFeature<T> : IFeature<T> where T : struct, IComparable
     {
-        private readonly SafeFileHandle _driverHandle;
         private readonly uint _controlCode;
+        private readonly SafeFileHandle _driverHandle;
         protected T LastState;
 
         protected AbstractDriverFeature(SafeFileHandle driverHandleHandle, uint controlCode)
@@ -45,7 +45,7 @@ namespace LenovoController.Features
                 throw new Exception("DeviceIoControl returned 0, last error: " + Marshal.GetLastWin32Error());
             return bytesReturned;
         }
-        
+
         protected static bool GetNthBit(uint num, int n)
         {
             return (num & (1 << n)) != 0;
