@@ -39,4 +39,4 @@ using System.Windows;
 )]
 
 
-[assembly: AssemblyVersion("1.0.1")]
+[assembly: AssemblyVersion("1.0.2")]
