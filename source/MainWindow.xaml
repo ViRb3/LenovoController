@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LenovoController"
         mc:Ignorable="d"
-        Title="Lenovo Controller" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" x:Name="mainWindow" FontSize="16">
+        Title="Lenovo Controller" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" x:Name="mainWindow" FontSize="14">
     <StackPanel Margin="15">
         <Grid>
             <Grid.RowDefinitions>
