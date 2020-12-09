@@ -6,7 +6,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("LenovoController")]
-[assembly: AssemblyDescription("A minimalistic alternative to Lenovo Vantage")]
+[assembly: AssemblyDescription("A lightweight alternative to Lenovo Vantage")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ViRb3")]
 [assembly: AssemblyProduct("LenovoController")]
