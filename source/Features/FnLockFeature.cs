@@ -27,7 +27,7 @@ namespace LenovoController.Features
                 case FnLockState.Off:
                     return new byte[] {0xF};
                 case FnLockState.On:
-                    return new byte[] {0xA, 0xE};
+                    return new byte[] {0xE};
                 default:
                     throw new Exception("Invalid state");
             }
