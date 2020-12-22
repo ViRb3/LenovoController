@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -34,12 +35,46 @@ namespace LenovoController
 
         private void Refresh()
         {
-            _fanProfileButtons[(int) _fanProfileFeature.GetState()].IsChecked = true;
-            _batteryButtons[(int) _batteryFeature.GetState()].IsChecked = true;
-            _alwaysOnUsbButtons[(int) _alwaysOnUsbFeature.GetState()].IsChecked = true;
-            chkOverDrive.IsChecked = _overDriveFeature.GetState() == OverDriveState.On;
-            chkTouchpadLock.IsChecked = _touchpadLockFeature.GetState() == TouchpadLockState.On;
-            chkFnLock.IsChecked = _fnLockFeature.GetState() == FnLockState.On;
+            var actions = new[]
+            {
+                new Tuple<Action, Action>(
+                    () => _fanProfileButtons[(int) _fanProfileFeature.GetState()].IsChecked = true,
+                    () => DisableButtons(_fanProfileButtons)),
+                new Tuple<Action, Action>(
+                    () => _batteryButtons[(int) _batteryFeature.GetState()].IsChecked = true,
+                    () => DisableButtons(_batteryButtons)),
+                new Tuple<Action, Action>(
+                    () => _alwaysOnUsbButtons[(int) _alwaysOnUsbFeature.GetState()].IsChecked = true,
+                    () => DisableButtons(_alwaysOnUsbButtons)),
+                new Tuple<Action, Action>(
+                    () => chkOverDrive.IsChecked = _overDriveFeature.GetState() == OverDriveState.On,
+                    () => chkOverDrive.IsEnabled = false),
+                new Tuple<Action, Action>(
+                    () => chkTouchpadLock.IsChecked = _touchpadLockFeature.GetState() == TouchpadLockState.On,
+                    () => chkTouchpadLock.IsEnabled = false),
+                new Tuple<Action, Action>(
+                    () => chkFnLock.IsChecked = _fnLockFeature.GetState() == FnLockState.On,
+                    () => chkFnLock.IsEnabled = false)
+            };
+
+            foreach (var action in actions)
+            {
+                try
+                {
+                    action.Item1();
+                }
+                catch (Exception e)
+                {
+                    Trace.TraceInformation("Could not refresh feature: " + e);
+                    action.Item2();
+                }
+            }
+        }
+
+        private void DisableButtons(RadioButton[] buttons)
+        {
+            foreach (var btn in buttons)
+                btn.IsEnabled = false;
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
