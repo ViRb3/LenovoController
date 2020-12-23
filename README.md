@@ -2,10 +2,11 @@
 
 > A lightweight alternative to Lenovo Vantage
 
-## Supported devices
+## Tested laptops
 
-- Legion 7
-- Ideapad 510S-14ISK
+- Legion 7 (official)
+- Ideapad 510S-14ISK (official)
+- Ideapad Gaming 3 ([source](https://www.reddit.com/r/LenovoLegion/comments/khpneu/lenovocontroller_opensource_lightweight/))
 
 ## Disclaimer
 
