@@ -49,7 +49,7 @@ namespace LenovoController
 
         private void Refresh()
         {
-            var actions = new FeatureCheck[]
+            var features = new[]
             {
                 new FeatureCheck(
                     () => _fanProfileButtons[(int) _fanProfileFeature.GetState()].IsChecked = true,
@@ -68,16 +68,16 @@ namespace LenovoController
                     () => chkFnLock.IsEnabled = false)
             };
 
-            foreach (var action in actions)
+            foreach (var feature in features)
             {
                 try
                 {
-                    action.Check();
+                    feature.Check();
                 }
                 catch (Exception e)
                 {
                     Trace.TraceInformation("Could not refresh feature: " + e);
-                    action.Disable();
+                    feature.Disable();
                 }
             }
         }
