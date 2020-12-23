@@ -53,13 +53,13 @@ namespace LenovoController
             {
                 new FeatureCheck(
                     () => _fanProfileButtons[(int) _fanProfileFeature.GetState()].IsChecked = true,
-                    () => DisableButtons(_fanProfileButtons)),
+                    () => DisableControls(_fanProfileButtons)),
                 new FeatureCheck(
                     () => _batteryButtons[(int) _batteryFeature.GetState()].IsChecked = true,
-                    () => DisableButtons(_batteryButtons)),
+                    () => DisableControls(_batteryButtons)),
                 new FeatureCheck(
                     () => _alwaysOnUsbButtons[(int) _alwaysOnUsbFeature.GetState()].IsChecked = true,
-                    () => DisableButtons(_alwaysOnUsbButtons)),
+                    () => DisableControls(_alwaysOnUsbButtons)),
                 new FeatureCheck(
                     () => chkOverDrive.IsChecked = _overDriveFeature.GetState() == OverDriveState.On,
                     () => chkOverDrive.IsEnabled = false),
@@ -82,7 +82,7 @@ namespace LenovoController
             }
         }
 
-        private void DisableButtons(RadioButton[] buttons)
+        private void DisableControls(Control[] buttons)
         {
             foreach (var btn in buttons)
                 btn.IsEnabled = false;
