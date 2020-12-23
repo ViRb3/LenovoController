@@ -5,6 +5,7 @@
 ## Supported devices
 
 - Legion 7
+- Ideapad 510S-14ISK
 
 ## Features
 
