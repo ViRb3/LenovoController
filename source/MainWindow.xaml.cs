@@ -32,23 +32,38 @@ namespace LenovoController
             Refresh();
         }
 
+        private class FeatureCheck
+        {
+            private readonly Action _check;
+            private readonly Action _disable;
+
+            internal FeatureCheck(Action check, Action disable)
+            {
+                _check = check;
+                _disable = disable;
+            }
+
+            internal void Check() => _check();
+            internal void Disable() => _disable();
+        }
+
         private void Refresh()
         {
-            var actions = new[]
+            var actions = new FeatureCheck[]
             {
-                new Tuple<Action, Action>(
+                new FeatureCheck(
                     () => _fanProfileButtons[(int) _fanProfileFeature.GetState()].IsChecked = true,
                     () => DisableButtons(_fanProfileButtons)),
-                new Tuple<Action, Action>(
+                new FeatureCheck(
                     () => _batteryButtons[(int) _batteryFeature.GetState()].IsChecked = true,
                     () => DisableButtons(_batteryButtons)),
-                new Tuple<Action, Action>(
+                new FeatureCheck(
                     () => _alwaysOnUsbButtons[(int) _alwaysOnUsbFeature.GetState()].IsChecked = true,
                     () => DisableButtons(_alwaysOnUsbButtons)),
-                new Tuple<Action, Action>(
+                new FeatureCheck(
                     () => chkOverDrive.IsChecked = _overDriveFeature.GetState() == OverDriveState.On,
                     () => chkOverDrive.IsEnabled = false),
-                new Tuple<Action, Action>(
+                new FeatureCheck(
                     () => chkFnLock.IsChecked = _fnLockFeature.GetState() == FnLockState.On,
                     () => chkFnLock.IsEnabled = false)
             };
@@ -57,12 +72,12 @@ namespace LenovoController
             {
                 try
                 {
-                    action.Item1();
+                    action.Check();
                 }
                 catch (Exception e)
                 {
                     Trace.TraceInformation("Could not refresh feature: " + e);
-                    action.Item2();
+                    action.Disable();
                 }
             }
         }
