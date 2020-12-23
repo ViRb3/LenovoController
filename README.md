@@ -7,6 +7,10 @@
 - Legion 7
 - Ideapad 510S-14ISK
 
+## Disclaimer
+
+While this program is made with best efforts to be safe, stable, and support all Lenovo laptops, I cannot guarantee that it won't break something on your device. Use it at your own risk.
+
 ## Features
 
 - ### Minimalistic interface
