@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
 
             <GroupBox Grid.Row="0" Grid.Column="0" Header="Battery mode" Margin="0,0,5,0">
-                <StackPanel Margin="5" Orientation="Vertical">
+                <StackPanel Margin="5,5,20,5" Orientation="Vertical">
                     <RadioButton Margin="0,0,0,5" x:Name="radioConservation" Content="Conservation"
                                  HorizontalAlignment="Left" VerticalAlignment="Top" Checked="radioBattery_Checked"
                                  VerticalContentAlignment="Center" />
@@ -35,7 +35,7 @@
             </GroupBox>
 
             <GroupBox Grid.Row="0" Grid.Column="1" Header="Always on USB" Margin="0">
-                <StackPanel Margin="5" Orientation="Vertical">
+                <StackPanel Margin="5,5,20,5" Orientation="Vertical">
                     <RadioButton Margin="0,0,0,5" x:Name="radioAlwaysOnUsbOff" Content="Off" HorizontalAlignment="Left"
                                  VerticalAlignment="Top" Checked="radioAlwaysOnUsb_Checked"
                                  Unchecked="radioAlwaysOnUsb_Checked" VerticalContentAlignment="Center" />
@@ -49,7 +49,7 @@
             </GroupBox>
 
             <GroupBox Grid.Row="1" Grid.Column="0" Header="Power mode" Margin="0,0,5,0">
-                <StackPanel Margin="5" Orientation="Vertical">
+                <StackPanel Margin="5,5,20,5" Orientation="Vertical">
                     <RadioButton Margin="0,0,0,5" x:Name="radioQuiet" Content="Quiet" HorizontalAlignment="Left"
                                  VerticalAlignment="Top" Checked="radioPowerMode_Checked"
                                  VerticalContentAlignment="Center" />
@@ -63,7 +63,7 @@
             </GroupBox>
 
             <GroupBox Grid.Row="1" Grid.Column="1" Margin="0" Header="Misc">
-                <StackPanel Margin="5" Orientation="Vertical">
+                <StackPanel Margin="5,5,20,5" Orientation="Vertical">
                     <CheckBox Margin="0,0,0,5" x:Name="chkOverDrive" Content="Over Drive" HorizontalAlignment="Left"
                               VerticalAlignment="Top" Checked="chkOverDrive_Checked" Unchecked="chkOverDrive_Checked"
                               VerticalContentAlignment="Center" />
