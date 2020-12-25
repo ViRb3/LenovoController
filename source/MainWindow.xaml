@@ -70,6 +70,9 @@
                     <CheckBox Margin="0,0,0,5" x:Name="chkFnLock" Content="Fn Lock" HorizontalAlignment="Left"
                               VerticalAlignment="Top" Checked="chkFnLock_Checked" Unchecked="chkFnLock_Checked"
                               VerticalContentAlignment="Center" />
+                    <CheckBox Margin="0" x:Name="chkTouchpadLock" Content="Touchpad Lock" HorizontalAlignment="Left"
+                              VerticalAlignment="Top" Checked="chkTouchpadLock_Checked"
+                              Unchecked="chkTouchpadLock_Checked" VerticalContentAlignment="Center" />
                 </StackPanel>
             </GroupBox>
         </Grid>
