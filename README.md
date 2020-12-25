@@ -18,7 +18,7 @@ While this program is made with best efforts to be safe, stable, and support all
 
   ![](assets/3.png)
 
-- ### Lightweight on RAM
+- ### Light on RAM
 
     <table>
     <tr>
@@ -44,4 +44,4 @@ You can use the official apps:
 
 - [Dolby Atmos for Gaming](https://www.microsoft.com/store/productId/9N00HQPF5RJ6) (Dolby)
 - [Smart Microphone Setting](https://www.microsoft.com/store/productId/9PMHKXF40N04) (microphone controls)
-- [Realtek Audio Console](https://www.microsoft.com/store/productId/9P2B8MCSVPLN) (includes the same microphone controls as above)
+- [Realtek Audio Console](https://www.microsoft.com/store/productId/9P2B8MCSVPLN) (speaker and microphone controls)
