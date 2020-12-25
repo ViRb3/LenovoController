@@ -64,7 +64,7 @@
     <Compile Include="Features\AbstractWmiFeature.cs" />
     <Compile Include="Features\AlwaysOnUsbFeature.cs" />
     <Compile Include="Features\BatteryFeature.cs" />
-    <Compile Include="Features\FanProfileFeature.cs" />
+    <Compile Include="Features\PowerModeFeature.cs" />
     <Compile Include="Features\FnLockFeature.cs" />
     <Compile Include="Features\IFeature.cs" />
     <Compile Include="Features\OverDriveFeature.cs" />

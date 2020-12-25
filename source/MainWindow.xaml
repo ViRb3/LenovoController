@@ -20,9 +20,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <GroupBox Grid.Row="0" Grid.Column="0" Header="Battery" Margin="0,0,5,0">
+            <GroupBox Grid.Row="0" Grid.Column="0" Header="Battery mode" Margin="0,0,5,0">
                 <StackPanel Margin="5" Orientation="Vertical">
-                    <RadioButton Margin="0,0,0,5" x:Name="radioConservation" Content="Conservation Mode"
+                    <RadioButton Margin="0,0,0,5" x:Name="radioConservation" Content="Conservation"
                                  HorizontalAlignment="Left" VerticalAlignment="Top" Checked="radioBattery_Checked"
                                  VerticalContentAlignment="Center" />
                     <RadioButton Margin="0,0,0,5" x:Name="radioNormalCharge" Content="Normal"
@@ -48,16 +48,16 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Grid.Row="1" Grid.Column="0" Header="Fan profile" Margin="0,0,5,0">
+            <GroupBox Grid.Row="1" Grid.Column="0" Header="Power mode" Margin="0,0,5,0">
                 <StackPanel Margin="5" Orientation="Vertical">
                     <RadioButton Margin="0,0,0,5" x:Name="radioQuiet" Content="Quiet" HorizontalAlignment="Left"
-                                 VerticalAlignment="Top" Checked="radioFanProfile_Checked"
+                                 VerticalAlignment="Top" Checked="radioPowerMode_Checked"
                                  VerticalContentAlignment="Center" />
                     <RadioButton Margin="0,0,0,5" x:Name="radioBalance" Content="Balance" HorizontalAlignment="Left"
-                                 VerticalAlignment="Top" Checked="radioFanProfile_Checked"
+                                 VerticalAlignment="Top" Checked="radioPowerMode_Checked"
                                  VerticalContentAlignment="Center" />
                     <RadioButton Margin="0" x:Name="radioPerformance" Content="Performance" HorizontalAlignment="Left"
-                                 VerticalAlignment="Top" Checked="radioFanProfile_Checked"
+                                 VerticalAlignment="Top" Checked="radioPowerMode_Checked"
                                  VerticalContentAlignment="Center" />
                 </StackPanel>
             </GroupBox>

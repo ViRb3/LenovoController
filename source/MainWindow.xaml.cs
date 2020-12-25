@@ -16,8 +16,8 @@ namespace LenovoController
         private readonly AlwaysOnUsbFeature _alwaysOnUsbFeature = new AlwaysOnUsbFeature();
         private readonly RadioButton[] _batteryButtons;
         private readonly BatteryFeature _batteryFeature = new BatteryFeature();
-        private readonly RadioButton[] _fanProfileButtons;
-        private readonly FanProfileFeature _fanProfileFeature = new FanProfileFeature();
+        private readonly RadioButton[] _powerModeButtons;
+        private readonly PowerModeFeature _powerModeFeature = new PowerModeFeature();
         private readonly FnLockFeature _fnLockFeature = new FnLockFeature();
         private readonly OverDriveFeature _overDriveFeature = new OverDriveFeature();
         private readonly TouchpadLockFeature _touchpadLockFeature = new TouchpadLockFeature();
@@ -27,7 +27,7 @@ namespace LenovoController
             InitializeComponent();
 
             mainWindow.Title += $" v{AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Version}";
-            _fanProfileButtons = new[] {radioQuiet, radioBalance, radioPerformance};
+            _powerModeButtons = new[] {radioQuiet, radioBalance, radioPerformance};
             _batteryButtons = new[] {radioConservation, radioNormalCharge, radioRapidCharge};
             _alwaysOnUsbButtons = new[] {radioAlwaysOnUsbOff, radioAlwaysOnUsbOnWhenSleeping, radioAlwaysOnUsbOnAlways};
             Refresh();
@@ -53,8 +53,8 @@ namespace LenovoController
             var features = new[]
             {
                 new FeatureCheck(
-                    () => _fanProfileButtons[(int) _fanProfileFeature.GetState()].IsChecked = true,
-                    () => DisableControls(_fanProfileButtons)),
+                    () => _powerModeButtons[(int) _powerModeFeature.GetState()].IsChecked = true,
+                    () => DisableControls(_powerModeButtons)),
                 new FeatureCheck(
                     () => _batteryButtons[(int) _batteryFeature.GetState()].IsChecked = true,
                     () => DisableControls(_batteryButtons)),
@@ -97,9 +97,9 @@ namespace LenovoController
             Refresh();
         }
 
-        private void radioFanProfile_Checked(object sender, RoutedEventArgs e)
+        private void radioPowerMode_Checked(object sender, RoutedEventArgs e)
         {
-            _fanProfileFeature.SetState((FanProfileState) Array.IndexOf(_fanProfileButtons, sender));
+            _powerModeFeature.SetState((PowerModeState) Array.IndexOf(_powerModeButtons, sender));
         }
 
         private void radioBattery_Checked(object sender, RoutedEventArgs e)
