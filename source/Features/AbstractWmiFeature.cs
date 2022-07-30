@@ -6,23 +6,30 @@ namespace LenovoController.Features
 {
     public class AbstractWmiFeature<T> : IFeature<T> where T : struct, IComparable
     {
-        private readonly string _methodNameSuffix;
+        private readonly string _methodGetterName;
+        private readonly string _methodSetterName;
         private readonly int _offset;
 
         protected AbstractWmiFeature(string methodNameSuffix, int offset)
+            : this("Get" + methodNameSuffix, "Set" + methodNameSuffix, offset)
         {
-            _methodNameSuffix = methodNameSuffix;
+        }
+
+        protected AbstractWmiFeature(string methodGetterName, string methodSetterName, int offset)
+        {
+            _methodGetterName = methodGetterName;
+            _methodSetterName = methodSetterName;
             _offset = offset;
         }
 
         public T GetState()
         {
-            return FromInternal(ExecuteGamezone("Get" + _methodNameSuffix, "Data"));
+            return FromInternal(ExecuteGamezone(_methodGetterName, "Data"));
         }
 
         public void SetState(T state)
         {
-            ExecuteGamezone("Set" + _methodNameSuffix, "Data",
+            ExecuteGamezone(_methodSetterName, "Data",
                 new Dictionary<string, string>
                 {
                     {"Data", ToInternal(state).ToString()}

@@ -21,6 +21,7 @@ namespace LenovoController
         private readonly FnLockFeature _fnLockFeature = new FnLockFeature();
         private readonly OverDriveFeature _overDriveFeature = new OverDriveFeature();
         private readonly TouchpadLockFeature _touchpadLockFeature = new TouchpadLockFeature();
+        private readonly ExtremeCoolingFeature _extremeCoolingFeature = new ExtremeCoolingFeature();
 
         public MainWindow()
         {
@@ -69,7 +70,10 @@ namespace LenovoController
                     () => chkTouchpadLock.IsEnabled = false),
                 new FeatureCheck(
                     () => chkFnLock.IsChecked = _fnLockFeature.GetState() == FnLockState.On,
-                    () => chkFnLock.IsEnabled = false)
+                    () => chkFnLock.IsEnabled = false),
+                new FeatureCheck(
+                    () => chkExtremeCooling.IsChecked = _extremeCoolingFeature.GetState() == ExtremeCoolingState.On,
+                    () => chkExtremeCooling.IsEnabled = false)
             };
 
             foreach (var feature in features)
@@ -134,6 +138,14 @@ namespace LenovoController
                 ? FnLockState.On
                 : FnLockState.Off;
             _fnLockFeature.SetState(state);
+        }
+
+        private void chkExtremeCooling_Checked(object sender, RoutedEventArgs e)
+        {
+            var state = chkExtremeCooling.IsChecked.GetValueOrDefault(false)
+                ? ExtremeCoolingState.On
+                : ExtremeCoolingState.Off;
+            _extremeCoolingFeature.SetState(state);
         }
     }
 }
