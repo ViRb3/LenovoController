@@ -4,9 +4,8 @@
 
 ## Tested laptops
 
-- Legion 7 2020 (official)
-- Ideapad 510S-14ISK (official)
-- Ideapad Gaming 3 ([source](https://www.reddit.com/r/LenovoLegion/comments/khpneu/lenovocontroller_opensource_lightweight/))
+- Legion 7 2020
+- Ideapad 510S-14ISK
 
 ## Disclaimer
 
