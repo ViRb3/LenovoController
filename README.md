@@ -6,6 +6,7 @@
 
 - Legion 7 2020
 - Ideapad 510S-14ISK
+- Legion 5Pi
 
 ## Disclaimer
 
