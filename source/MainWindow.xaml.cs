@@ -1,9 +1,11 @@
-﻿using System;
+﻿using LenovoController.Features;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using LenovoController.Features;
+using NotifyIcon = System.Windows.Forms.NotifyIcon;
+using MouseButtons = System.Windows.Forms.MouseButtons;
 
 namespace LenovoController
 {
@@ -16,6 +18,7 @@ namespace LenovoController
         private readonly AlwaysOnUsbFeature _alwaysOnUsbFeature = new AlwaysOnUsbFeature();
         private readonly RadioButton[] _batteryButtons;
         private readonly BatteryFeature _batteryFeature = new BatteryFeature();
+        private readonly NotifyIcon _notifyIcon;
         private readonly RadioButton[] _powerModeButtons;
         private readonly PowerModeFeature _powerModeFeature = new PowerModeFeature();
         private readonly FnLockFeature _fnLockFeature = new FnLockFeature();
@@ -26,11 +29,52 @@ namespace LenovoController
         {
             InitializeComponent();
 
+            // Check if the program was started with the "-minimized" command-line argument
+            var startMinimized = false;
+            var args = Environment.GetCommandLineArgs();
+            if (args.Length > 1 && args[1] == "-minimized")
+            {
+                startMinimized = true;
+            }
+
+            if (startMinimized)
+            {
+                // Set the WindowState property to WindowState.Minimized to start the program minimized
+                WindowState = WindowState.Minimized;
+            }
+
             mainWindow.Title += $" v{AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Version}";
-            _powerModeButtons = new[] {radioQuiet, radioBalance, radioPerformance};
-            _batteryButtons = new[] {radioConservation, radioNormalCharge, radioRapidCharge};
-            _alwaysOnUsbButtons = new[] {radioAlwaysOnUsbOff, radioAlwaysOnUsbOnWhenSleeping, radioAlwaysOnUsbOnAlways};
+            _powerModeButtons = new[] { radioQuiet, radioBalance, radioPerformance };
+            _batteryButtons = new[] { radioConservation, radioNormalCharge, radioRapidCharge };
+            _alwaysOnUsbButtons = new[] { radioAlwaysOnUsbOff, radioAlwaysOnUsbOnWhenSleeping, radioAlwaysOnUsbOnAlways };
             Refresh();
+
+            // Initialize NotifyIcon
+            _notifyIcon = new NotifyIcon
+            {
+                Icon = new System.Drawing.Icon("icon.ico"),
+                Visible = true,
+                Text = "Lenovo Controller"
+            };
+            _notifyIcon.MouseClick += NotifyIcon_MouseClick;
+        }
+
+        private void NotifyIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Show();
+                WindowState = WindowState.Normal;
+            }
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+            {
+                Hide();
+            }
+            base.OnStateChanged(e);
         }
 
         private class FeatureCheck
@@ -99,17 +143,17 @@ namespace LenovoController
 
         private void radioPowerMode_Checked(object sender, RoutedEventArgs e)
         {
-            _powerModeFeature.SetState((PowerModeState) Array.IndexOf(_powerModeButtons, sender));
+            _powerModeFeature.SetState((PowerModeState)Array.IndexOf(_powerModeButtons, sender));
         }
 
         private void radioBattery_Checked(object sender, RoutedEventArgs e)
         {
-            _batteryFeature.SetState((BatteryState) Array.IndexOf(_batteryButtons, sender));
+            _batteryFeature.SetState((BatteryState)Array.IndexOf(_batteryButtons, sender));
         }
 
         private void radioAlwaysOnUsb_Checked(object sender, RoutedEventArgs e)
         {
-            _alwaysOnUsbFeature.SetState((AlwaysOnUsbState) Array.IndexOf(_alwaysOnUsbButtons, sender));
+            _alwaysOnUsbFeature.SetState((AlwaysOnUsbState)Array.IndexOf(_alwaysOnUsbButtons, sender));
         }
 
         private void chkOverDrive_Checked(object sender, RoutedEventArgs e)

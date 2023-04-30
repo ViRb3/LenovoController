@@ -31,12 +31,12 @@ namespace LenovoController.Features
 
         private int ToInternal(T state)
         {
-            return (int) (object) state + _offset;
+            return (int)(object)state + _offset;
         }
 
         private T FromInternal(int state)
         {
-            return (T) (object) (state - _offset);
+            return (T)(object)(state - _offset);
         }
 
         private static int ExecuteGamezone(string methodName, string resultPropertyName,
@@ -55,7 +55,7 @@ namespace LenovoController.Features
             {
                 if (!enumerator.MoveNext())
                     throw new Exception("No results in query");
-                var mo = (ManagementObject) enumerator.Current;
+                var mo = (ManagementObject)enumerator.Current;
                 var methodParamsObject = mo.GetMethodParameters(methodName);
                 if (methodParams != null)
                     foreach (var pair in methodParams)

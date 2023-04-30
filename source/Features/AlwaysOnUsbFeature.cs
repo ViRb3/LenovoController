@@ -1,5 +1,5 @@
-﻿using System;
-using LenovoController.Providers;
+﻿using LenovoController.Providers;
+using System;
 
 namespace LenovoController.Features
 {
@@ -26,11 +26,11 @@ namespace LenovoController.Features
             switch (state)
             {
                 case AlwaysOnUsbState.Off:
-                    return new byte[] {0xB, 0x12};
+                    return new byte[] { 0xB, 0x12 };
                 case AlwaysOnUsbState.OnWhenSleeping:
-                    return new byte[] {0xA, 0x12};
+                    return new byte[] { 0xA, 0x12 };
                 case AlwaysOnUsbState.OnAlways:
-                    return new byte[] {0xA, 0x13};
+                    return new byte[] { 0xA, 0x13 };
                 default:
                     throw new Exception("Invalid state");
             }

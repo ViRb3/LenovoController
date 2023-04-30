@@ -1,5 +1,5 @@
-﻿using System;
-using LenovoController.Providers;
+﻿using LenovoController.Providers;
+using System;
 
 namespace LenovoController.Features
 {
@@ -25,9 +25,9 @@ namespace LenovoController.Features
             switch (state)
             {
                 case FnLockState.Off:
-                    return new byte[] {0xF};
+                    return new byte[] { 0xF };
                 case FnLockState.On:
-                    return new byte[] {0xE};
+                    return new byte[] { 0xE };
                 default:
                     throw new Exception("Invalid state");
             }
